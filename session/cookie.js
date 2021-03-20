@@ -22,7 +22,7 @@ var deprecate = require('depd')('express-session')
  * @api private
  */
 
-var Cookie = module.exports = function Cookie(options) {
+var Cookie = module.exports = function Cookie(options, req) {
   this.path = '/';
   this.maxAge = null;
   this.httpOnly = true;
@@ -33,7 +33,10 @@ var Cookie = module.exports = function Cookie(options) {
     }
 
     for (var key in options) {
-      if (key !== 'data') {
+      // FORK
+      if(key === "domain") {
+        this.domain = typeof options.domain === "function" ? options.domain(req) : options.domain;
+      } else if (key !== 'data') {
         this[key] = options[key]
       }
     }

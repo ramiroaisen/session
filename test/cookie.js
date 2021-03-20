@@ -110,9 +110,24 @@ describe('new Cookie()', function () {
     describe('path', function () {
       it('should set path', function () {
         var cookie = new Cookie({ path: '/foo' })
-
         assert.strictEqual(cookie.path, '/foo')
       })
     })
+
+    describe("domain (string)", function() {
+      const domain = "example.com";
+      it("should set domain (string)", function() {
+        var cookie = new Cookie({ domain });
+        assert.strictEqual(cookie.domain, domain);      
+      })
+
+      it("should set domain (function)", function() {
+        var request = { headers: { host: domain } };
+        var cookie = new Cookie({ domain: req => req.headers.host }, request);
+        assert.strictEqual(cookie.domain, domain);
+      })
+    })
+
+    describe("")
   })
 })
