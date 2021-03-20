@@ -158,7 +158,7 @@ function session(options) {
   store.generate = function(req){
     req.sessionID = generateId(req);
     req.session = new Session(req);
-    req.session.cookie = new Cookie(cookieOptions);
+    req.session.cookie = new Cookie(cookieOptions, req);
 
     if (cookieOptions.secure === 'auto') {
       req.session.cookie.secure = issecure(req, trustProxy);

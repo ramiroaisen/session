@@ -114,20 +114,19 @@ describe('new Cookie()', function () {
       })
     })
 
-    describe("domain (string)", function() {
-      const domain = "example.com";
+    // FORK: added domain tests for string and function
+    describe("domain", function() {
+      var domain = "example.com";
       it("should set domain (string)", function() {
         var cookie = new Cookie({ domain });
         assert.strictEqual(cookie.domain, domain);      
       })
 
       it("should set domain (function)", function() {
-        var request = { headers: { host: domain } };
-        var cookie = new Cookie({ domain: req => req.headers.host }, request);
+        var req = { headers: { host: domain } };
+        var cookie = new Cookie({ domain: function(req){ return req.headers.host }}, req);
         assert.strictEqual(cookie.domain, domain);
       })
     })
-
-    describe("")
   })
 })

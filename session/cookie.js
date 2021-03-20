@@ -33,7 +33,7 @@ var Cookie = module.exports = function Cookie(options, req) {
     }
 
     for (var key in options) {
-      // FORK
+      // FORK: feat: add domain function option
       if(key === "domain") {
         this.domain = typeof options.domain === "function" ? options.domain(req) : options.domain;
       } else if (key !== 'data') {

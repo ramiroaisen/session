@@ -87,7 +87,8 @@ Store.prototype.createSession = function(req, sess){
   var expires = sess.cookie.expires
   var originalMaxAge = sess.cookie.originalMaxAge
 
-  sess.cookie = new Cookie(sess.cookie);
+  // FORK: No need to pass req here as cookie.domain is already converted to string but nevertheless...
+  sess.cookie = new Cookie(sess.cookie, req);
 
   if (typeof expires === 'string') {
     // convert expires to a Date object
